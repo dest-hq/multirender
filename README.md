@@ -7,8 +7,6 @@
 [![Crates.io](https://img.shields.io/crates/v/multirender.svg)](https://crates.io/crates/multirender)
 [![Docs](https://docs.rs/multirender/badge.svg)](https://docs.rs/multirender)
 
-MultiRender is a fork of [AnyRender](https://github.com/DioxusLabs/anyrender).
-
 A 2D drawing abstraction that allows applications/frameworks to support many rendering backends through a unified API.
 
 ## Crates
