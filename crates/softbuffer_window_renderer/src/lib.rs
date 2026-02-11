@@ -1,9 +1,9 @@
-//! An AnyRender WindowRenderer for rendering pixel buffers using the softbuffer crate
+//! An MultiRender WindowRenderer for rendering pixel buffers using the softbuffer crate
 
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-use anyrender::{ImageRenderer, WindowHandle, WindowRenderer};
 use debug_timer::debug_timer;
+use multirender::{ImageRenderer, WindowHandle, WindowRenderer};
 use softbuffer::{Context, Surface};
 use std::{num::NonZero, sync::Arc};
 

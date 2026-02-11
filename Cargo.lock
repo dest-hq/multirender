@@ -154,116 +154,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "anyrender"
-version = "0.7.0"
-dependencies = [
- "kurbo",
- "peniko",
- "raw-window-handle",
- "serde",
-]
-
-[[package]]
-name = "anyrender_serialize"
-version = "0.1.0"
-dependencies = [
- "anyrender",
- "image",
- "klippa",
- "kurbo",
- "peniko",
- "read-fonts 0.37.0 (git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826)",
- "serde",
- "serde_json",
- "sha2",
- "ttf2woff2",
- "wuff",
- "zip",
-]
-
-[[package]]
-name = "anyrender_skia"
-version = "0.4.0"
-dependencies = [
- "anyrender",
- "ash 0.38.0+1.3.281",
- "ash-window",
- "debug_timer",
- "gl",
- "glutin",
- "hashbrown 0.16.1",
- "kurbo",
- "oaty",
- "objc2 0.6.3",
- "objc2-app-kit 0.3.2",
- "objc2-core-foundation",
- "objc2-metal 0.3.2",
- "objc2-quartz-core 0.3.2",
- "objc2-ui-kit 0.3.2",
- "peniko",
- "pixels_window_renderer",
- "raw-window-handle",
- "skia-safe",
- "softbuffer_window_renderer",
-]
-
-[[package]]
-name = "anyrender_svg"
-version = "0.8.0"
-dependencies = [
- "anyrender",
- "image",
- "kurbo",
- "peniko",
- "thiserror 2.0.17",
- "usvg",
-]
-
-[[package]]
-name = "anyrender_vello"
-version = "0.7.1"
-dependencies = [
- "anyrender",
- "debug_timer",
- "kurbo",
- "peniko",
- "pollster 0.4.0",
- "rustc-hash 2.1.1",
- "vello",
- "wgpu 27.0.1",
- "wgpu_context",
-]
-
-[[package]]
-name = "anyrender_vello_cpu"
-version = "0.9.0"
-dependencies = [
- "anyrender",
- "debug_timer",
- "kurbo",
- "peniko",
- "pixels_window_renderer",
- "softbuffer_window_renderer",
- "vello_cpu",
-]
-
-[[package]]
-name = "anyrender_vello_hybrid"
-version = "0.2.2"
-dependencies = [
- "anyrender",
- "debug_timer",
- "kurbo",
- "peniko",
- "pollster 0.4.0",
- "rustc-hash 2.1.1",
- "vello_common",
- "vello_hybrid",
- "wgpu 27.0.1",
- "wgpu_context",
-]
-
-[[package]]
 name = "arbitrary"
 version = "1.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -454,14 +344,14 @@ checksum = "46c5e41b57b8bba42a04676d81cb89e9ee8e859a1a66f80a5a72e1cb76b34d43"
 name = "bunnymark"
 version = "0.1.0"
 dependencies = [
- "anyrender",
- "anyrender_skia",
- "anyrender_vello",
- "anyrender_vello_cpu",
- "anyrender_vello_hybrid",
  "fastrand",
  "image",
  "kurbo",
+ "multirender",
+ "multirender_skia",
+ "multirender_vello",
+ "multirender_vello_cpu",
+ "multirender_vello_hybrid",
  "peniko",
  "pixels_window_renderer",
  "winit",
@@ -1194,14 +1084,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "font-types"
-version = "0.11.0"
-source = "git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826#41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826"
-dependencies = [
- "bytemuck",
-]
-
-[[package]]
 name = "fontconfig-parser"
 version = "0.5.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1779,20 +1661,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2db585e1d738fc771bf08a151420d3ed193d9d895a36df7f6f8a9456b911ddc"
 
 [[package]]
-name = "klippa"
-version = "0.1.0"
-source = "git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826#41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826"
-dependencies = [
- "clap",
- "fnv",
- "hashbrown 0.15.5",
- "regex",
- "skrifa 0.40.0 (git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826)",
- "thiserror 1.0.69",
- "write-fonts",
-]
-
-[[package]]
 name = "kurbo"
 version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1980,6 +1848,116 @@ checksum = "0fbdd3d7436f8b5e892b8b7ea114271ff0fa00bc5acae845d53b07d498616ef6"
 dependencies = [
  "num-traits",
  "pxfm",
+]
+
+[[package]]
+name = "multirender"
+version = "0.1.0"
+dependencies = [
+ "kurbo",
+ "peniko",
+ "raw-window-handle",
+ "serde",
+]
+
+[[package]]
+name = "multirender_serialize"
+version = "0.1.0"
+dependencies = [
+ "image",
+ "kurbo",
+ "multirender",
+ "peniko",
+ "read-fonts 0.37.0",
+ "serde",
+ "serde_json",
+ "sha2",
+ "skera",
+ "ttf2woff2",
+ "wuff",
+ "zip",
+]
+
+[[package]]
+name = "multirender_skia"
+version = "0.4.0"
+dependencies = [
+ "ash 0.38.0+1.3.281",
+ "ash-window",
+ "debug_timer",
+ "gl",
+ "glutin",
+ "hashbrown 0.16.1",
+ "kurbo",
+ "multirender",
+ "oaty",
+ "objc2 0.6.3",
+ "objc2-app-kit 0.3.2",
+ "objc2-core-foundation",
+ "objc2-metal 0.3.2",
+ "objc2-quartz-core 0.3.2",
+ "objc2-ui-kit 0.3.2",
+ "peniko",
+ "pixels_window_renderer",
+ "raw-window-handle",
+ "skia-safe",
+ "softbuffer_window_renderer",
+]
+
+[[package]]
+name = "multirender_svg"
+version = "0.8.0"
+dependencies = [
+ "image",
+ "kurbo",
+ "multirender",
+ "peniko",
+ "thiserror 2.0.17",
+ "usvg",
+]
+
+[[package]]
+name = "multirender_vello"
+version = "0.7.1"
+dependencies = [
+ "debug_timer",
+ "kurbo",
+ "multirender",
+ "peniko",
+ "pollster 0.4.0",
+ "rustc-hash 2.1.1",
+ "vello",
+ "wgpu 27.0.1",
+ "wgpu_context",
+]
+
+[[package]]
+name = "multirender_vello_cpu"
+version = "0.9.0"
+dependencies = [
+ "debug_timer",
+ "kurbo",
+ "multirender",
+ "peniko",
+ "pixels_window_renderer",
+ "softbuffer_window_renderer",
+ "vello_cpu",
+]
+
+[[package]]
+name = "multirender_vello_hybrid"
+version = "0.2.2"
+dependencies = [
+ "debug_timer",
+ "kurbo",
+ "multirender",
+ "peniko",
+ "pollster 0.4.0",
+ "rustc-hash 2.1.1",
+ "vello_common",
+ "vello_hybrid",
+ "wgpu 27.0.1",
+ "wgpu_context",
 ]
 
 [[package]]
@@ -2587,8 +2565,8 @@ dependencies = [
 name = "pixels_window_renderer"
 version = "0.2.0"
 dependencies = [
- "anyrender",
  "debug_timer",
+ "multirender",
  "pixels",
 ]
 
@@ -2806,16 +2784,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7b634fabf032fab15307ffd272149b622260f55974d9fad689292a5d33df02e5"
 dependencies = [
  "bytemuck",
- "font-types 0.11.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "read-fonts"
-version = "0.37.0"
-source = "git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826#41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826"
-dependencies = [
- "bytemuck",
- "font-types 0.11.0 (git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826)",
+ "font-types 0.11.0",
 ]
 
 [[package]]
@@ -3063,11 +3032,11 @@ dependencies = [
 name = "serialize"
 version = "0.1.0"
 dependencies = [
- "anyrender",
- "anyrender_serialize",
- "anyrender_vello_cpu",
  "image",
  "kurbo",
+ "multirender",
+ "multirender_serialize",
+ "multirender_vello_cpu",
  "parley",
  "peniko",
 ]
@@ -3109,6 +3078,21 @@ name = "siphasher"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "56199f7ddabf13fe5074ce809e7d3f42b42ae711800501b5b16ea82ad029c39d"
+
+[[package]]
+name = "skera"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "78071e59409b81dffa944716740f7cc90e26dc3f3b1214fb58beae5f48ffcb36"
+dependencies = [
+ "clap",
+ "fnv",
+ "hashbrown 0.15.5",
+ "regex",
+ "skrifa 0.40.0",
+ "thiserror 1.0.69",
+ "write-fonts",
+]
 
 [[package]]
 name = "skia-bindings"
@@ -3154,16 +3138,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7fbdfe3d2475fbd7ddd1f3e5cf8288a30eb3e5f95832829570cd88115a7434ac"
 dependencies = [
  "bytemuck",
- "read-fonts 0.37.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "skrifa"
-version = "0.40.0"
-source = "git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826#41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826"
-dependencies = [
- "bytemuck",
- "read-fonts 0.37.0 (git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826)",
+ "read-fonts 0.37.0",
 ]
 
 [[package]]
@@ -3260,8 +3235,8 @@ dependencies = [
 name = "softbuffer_window_renderer"
 version = "0.2.1"
 dependencies = [
- "anyrender",
  "debug_timer",
+ "multirender",
  "softbuffer",
 ]
 
@@ -3690,7 +3665,7 @@ dependencies = [
  "log",
  "peniko",
  "png 0.17.16",
- "skrifa 0.40.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "skrifa 0.40.0",
  "static_assertions",
  "thiserror 2.0.17",
  "vello_encoding",
@@ -3710,7 +3685,7 @@ dependencies = [
  "log",
  "peniko",
  "png 0.17.16",
- "skrifa 0.40.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "skrifa 0.40.0",
  "smallvec",
 ]
 
@@ -3738,7 +3713,7 @@ dependencies = [
  "bytemuck",
  "guillotiere",
  "peniko",
- "skrifa 0.40.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "skrifa 0.40.0",
  "smallvec",
 ]
 
@@ -4690,12 +4665,12 @@ dependencies = [
 name = "winit-example"
 version = "0.1.0"
 dependencies = [
- "anyrender",
- "anyrender_skia",
- "anyrender_vello",
- "anyrender_vello_cpu",
- "anyrender_vello_hybrid",
  "kurbo",
+ "multirender",
+ "multirender_skia",
+ "multirender_vello",
+ "multirender_vello_cpu",
+ "multirender_vello_hybrid",
  "peniko",
  "winit",
 ]
@@ -4718,13 +4693,14 @@ checksum = "f17a85883d4e6d00e8a97c586de764dabcc06133f7f1d55dce5cdc070ad7fe59"
 [[package]]
 name = "write-fonts"
 version = "0.45.0"
-source = "git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826#41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f12725b0845073e20b04e79b500dbfb465904d7cbd84883a1f1bbd084debc515"
 dependencies = [
- "font-types 0.11.0 (git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826)",
+ "font-types 0.11.0",
  "indexmap",
  "kurbo",
  "log",
- "read-fonts 0.37.0 (git+https://github.com/googlefonts/fontations?rev=41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826)",
+ "read-fonts 0.37.0",
 ]
 
 [[package]]

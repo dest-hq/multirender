@@ -1,12 +1,12 @@
 [workspace]
 members = [
-  "crates/anyrender",
-  "crates/anyrender_serialize",
-  "crates/anyrender_skia",
-  "crates/anyrender_vello",
-  "crates/anyrender_vello_cpu",
-  "crates/anyrender_vello_hybrid",
-  "crates/anyrender_svg",
+  "crates/multirender",
+  "crates/multirender_serialize",
+  "crates/multirender_skia",
+  "crates/multirender_vello",
+  "crates/multirender_vello_cpu",
+  "crates/multirender_vello_hybrid",
+  "crates/multirender_svg",
   "crates/wgpu_context",
   "crates/pixels_window_renderer",
   "crates/softbuffer_window_renderer",
@@ -17,23 +17,21 @@ members = [
 resolver = "2"
 
 [workspace.package]
-version = "0.6.0"
+version = "0.1.0"
 license = "MIT OR Apache-2.0"
-homepage = "https://github.com/dioxuslabs/anyrender"
-repository = "https://github.com/dioxuslabs/anyrender"
 categories = ["gui"]
 edition = "2024"
 rust-version = "1.88.0"
 
 [workspace.dependencies]
-# AnyRender dependencies (in-repo)
-anyrender = { version = "0.7.0", path = "./crates/anyrender" }
-anyrender_serialize = { version = "0.1.0", path = "./crates/anyrender_serialize" }
-anyrender_skia = { version = "0.4.0", path = "./crates/anyrender_skia" }
-anyrender_vello = { version = "0.7.0", path = "./crates/anyrender_vello" }
-anyrender_vello_cpu = { version = "0.9.0", path = "./crates/anyrender_vello_cpu" }
-anyrender_vello_hybrid = { version = "0.2.0", path = "./crates/anyrender_vello_hybrid" }
-anyrender_svg = { version = "0.8.0", path = "./crates/anyrender_svg" }
+# MultiRender dependencies (in-repo)
+multirender = { version = "0.1.0", path = "./crates/multirender" }
+multirender_serialize = { version = "0.1.0", path = "./crates/multirender_serialize" }
+multirender_skia = { version = "0.4.0", path = "./crates/multirender_skia" }
+multirender_vello = { version = "0.7.0", path = "./crates/multirender_vello" }
+multirender_vello_cpu = { version = "0.9.0", path = "./crates/multirender_vello_cpu" }
+multirender_vello_hybrid = { version = "0.2.0", path = "./crates/multirender_vello_hybrid" }
+multirender_svg = { version = "0.8.0", path = "./crates/multirender_svg" }
 wgpu_context = { version = "0.3.0", path = "./crates/wgpu_context" }
 pixels_window_renderer = { version = "0.2.0", path = "./crates/pixels_window_renderer" }
 softbuffer_window_renderer = { version = "0.2.0", path = "./crates/softbuffer_window_renderer" }
@@ -43,8 +41,8 @@ serde = "1.0.228"
 serde_json = "1.0"
 zip = { version = "2.1", default-features = false, features = ["deflate"] }
 sha2 = "0.10"
-klippa = { git = "https://github.com/googlefonts/fontations", rev = "41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826" }
-read-fonts = { git = "https://github.com/googlefonts/fontations", rev = "41ec2bdd6dd8589b65eaaaf182b0a2e701d0d826" }
+skera = "0.1"
+read-fonts = "0.37"
 ttf2woff2 = "0.11"
 wuff = "0.2"
 

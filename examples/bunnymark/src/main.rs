@@ -1,10 +1,10 @@
-use anyrender::{PaintScene, WindowRenderer};
-use anyrender_skia::{SkiaImageRenderer, SkiaWindowRenderer};
-use anyrender_vello::VelloWindowRenderer;
-use anyrender_vello_cpu::VelloCpuWindowRenderer;
-use anyrender_vello_hybrid::VelloHybridWindowRenderer;
 use bunny::BunnyManager;
 use kurbo::{Affine, Circle, Point, Rect, Stroke};
+use multirender::{PaintScene, WindowRenderer};
+use multirender_skia::{SkiaImageRenderer, SkiaWindowRenderer};
+use multirender_vello::VelloWindowRenderer;
+use multirender_vello_cpu::VelloCpuWindowRenderer;
+use multirender_vello_hybrid::VelloHybridWindowRenderer;
 use peniko::{Color, Fill};
 use pixels_window_renderer::PixelsWindowRenderer;
 use std::sync::Arc;
@@ -140,7 +140,7 @@ impl App {
                     self.logical_height,
                 ))
                 .with_resizable(true)
-                .with_title("anyrender + winit demo")
+                .with_title("multirender + winit demo")
                 .with_visible(true)
                 .with_active(true);
             Arc::new(event_loop.create_window(attr).unwrap())

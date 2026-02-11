@@ -1,9 +1,9 @@
-//! An AnyRender WindowRenderer for rendering pixel buffers using the pixels crate
+//! An MultiRender WindowRenderer for rendering pixel buffers using the pixels crate
 
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-use anyrender::{ImageRenderer, WindowHandle, WindowRenderer};
 use debug_timer::debug_timer;
+use multirender::{ImageRenderer, WindowHandle, WindowRenderer};
 use pixels::{Pixels, SurfaceTexture, wgpu::Color};
 use std::sync::Arc;
 

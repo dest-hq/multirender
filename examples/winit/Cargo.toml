@@ -9,11 +9,11 @@ publish = false
 kurbo = { workspace = true }
 winit = { workspace = true }
 peniko = { workspace = true }
-anyrender = { workspace = true }
-anyrender_vello = { workspace = true }
-anyrender_skia = { workspace = true }
-anyrender_vello_hybrid = { workspace = true }
-anyrender_vello_cpu = { workspace = true, features = [
+multirender = { workspace = true }
+multirender_vello = { workspace = true }
+multirender_skia = { workspace = true }
+multirender_vello_hybrid = { workspace = true }
+multirender_vello_cpu = { workspace = true, features = [
   "pixels_window_renderer",
   "softbuffer_window_renderer",
 ] }

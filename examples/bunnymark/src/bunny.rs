@@ -1,8 +1,8 @@
 use std::{io::Cursor, sync::Arc};
 
-use anyrender::PaintScene;
 use image::ImageReader;
 use kurbo::{Affine, Size, Vec2};
+use multirender::PaintScene;
 use peniko::{Blob, ImageBrush, ImageData, ImageSampler};
 
 const GRAVITY: f64 = 0.5;

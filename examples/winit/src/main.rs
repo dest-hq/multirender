@@ -1,9 +1,11 @@
-use anyrender::{NullWindowRenderer, PaintScene, WindowRenderer};
-use anyrender_skia::SkiaWindowRenderer;
-use anyrender_vello::VelloWindowRenderer;
-use anyrender_vello_cpu::{PixelsWindowRenderer, SoftbufferWindowRenderer, VelloCpuImageRenderer};
-use anyrender_vello_hybrid::VelloHybridWindowRenderer;
 use kurbo::{Affine, Circle, Point, Rect, Stroke};
+use multirender::{NullWindowRenderer, PaintScene, WindowRenderer};
+use multirender_skia::SkiaWindowRenderer;
+use multirender_vello::VelloWindowRenderer;
+use multirender_vello_cpu::{
+    PixelsWindowRenderer, SoftbufferWindowRenderer, VelloCpuImageRenderer,
+};
+use multirender_vello_hybrid::VelloHybridWindowRenderer;
 use peniko::{Color, Fill};
 use std::sync::Arc;
 use winit::{
@@ -23,7 +25,7 @@ struct App {
 type VelloCpuSBWindowRenderer = SoftbufferWindowRenderer<VelloCpuImageRenderer>;
 type VelloCpuWindowRenderer = PixelsWindowRenderer<VelloCpuImageRenderer>;
 
-type InitialBackend = SkiaWindowRenderer;
+type InitialBackend = VelloCpuSBWindowRenderer;
 // type InitialBackend = VelloWindowRenderer;
 // type InitialBackend = VelloHybridWindowRenderer;
 // type InitialBackend = VelloCpuWindowRenderer;
@@ -156,7 +158,7 @@ impl App {
             let attr = Window::default_attributes()
                 .with_inner_size(winit::dpi::LogicalSize::new(self.width, self.height))
                 .with_resizable(true)
-                .with_title("anyrender + winit demo")
+                .with_title("multirender + winit demo")
                 .with_visible(true)
                 .with_active(true);
             Arc::new(event_loop.create_window(attr).unwrap())

@@ -4,12 +4,12 @@ use std::fs::File;
 use std::io::BufWriter;
 use std::path::Path;
 
-use anyrender::recording::Scene;
-use anyrender::{Glyph, PaintScene, render_to_buffer};
-use anyrender_serialize::{SceneArchive, SerializeConfig};
-use anyrender_vello_cpu::VelloCpuImageRenderer;
 use image::{ImageBuffer, RgbaImage};
 use kurbo::{Affine, Circle, Point, Rect, RoundedRect, Stroke};
+use multirender::recording::Scene;
+use multirender::{Glyph, PaintScene, render_to_buffer};
+use multirender_serialize::{SceneArchive, SerializeConfig};
+use multirender_vello_cpu::VelloCpuImageRenderer;
 use parley::style::{FontFamily, FontStack};
 use parley::{Alignment, AlignmentOptions, FontContext, Layout, LayoutContext, StyleProperty};
 use peniko::{
@@ -31,7 +31,7 @@ fn main() {
         .unwrap();
 
     // Serialize
-    let archive_path = Path::new(OUTPUT_DIR).join("demo_scene.anyrender.zip");
+    let archive_path = Path::new(OUTPUT_DIR).join("demo_scene.multirender.zip");
     let file = File::create(&archive_path).unwrap();
     let writer = BufWriter::new(file);
     let config = SerializeConfig::new()
