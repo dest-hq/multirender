@@ -9,11 +9,12 @@
 
 A 2D drawing abstraction that allows applications/frameworks to support many rendering backends through a unified API.
 
-## Crates
+## Backends
 
-### `multirender`
-
-The core [multirender](https://docs.rs/multirender) crate defines abstractions for 2D rendering...
+- Skia
+- Vello
+- Vello CPU
+- Vello Hybrid
 
 ## Credits
 
