@@ -54,9 +54,16 @@ impl<Renderer: ImageRenderer> WindowRenderer for SoftbufferWindowRenderer<Render
         matches!(self.render_state, RenderState::Active(_))
     }
 
-    fn resume(&mut self, window_handle: Arc<dyn WindowHandle>, width: u32, height: u32) {
-        let context = Context::new(window_handle.clone()).unwrap();
-        let surface = Surface::new(&context, window_handle.clone()).unwrap();
+    fn resume(
+        &mut self,
+        window_handle: Arc<dyn WindowHandle>,
+        width: u32,
+        height: u32,
+    ) -> Result<(), String> {
+        let context = Context::new(window_handle.clone())
+            .map_err(|_| "Can't create a context".to_string())?;
+        let surface = Surface::new(&context, window_handle.clone())
+            .map_err(|_| "Can't create a surface".to_string())?;
         self.render_state = RenderState::Active(ActiveRenderState {
             _context: context,
             surface,
@@ -64,6 +71,8 @@ impl<Renderer: ImageRenderer> WindowRenderer for SoftbufferWindowRenderer<Render
         self.window_handle = Some(window_handle);
 
         self.set_size(width, height);
+
+        Ok(())
     }
 
     fn suspend(&mut self) {

@@ -52,9 +52,15 @@ impl<Renderer: ImageRenderer> WindowRenderer for PixelsWindowRenderer<Renderer> 
         matches!(self.render_state, RenderState::Active(_))
     }
 
-    fn resume(&mut self, window_handle: Arc<dyn WindowHandle>, width: u32, height: u32) {
+    fn resume(
+        &mut self,
+        window_handle: Arc<dyn WindowHandle>,
+        width: u32,
+        height: u32,
+    ) -> Result<(), String> {
         let surface = SurfaceTexture::new(width, height, window_handle.clone());
-        let mut pixels = Pixels::new(width, height, surface).unwrap();
+        let mut pixels =
+            Pixels::new(width, height, surface).map_err(|_| "Can't create a canvas to draw")?;
         pixels.enable_vsync(true);
         pixels.clear_color(Color {
             r: 1.0,
@@ -66,6 +72,7 @@ impl<Renderer: ImageRenderer> WindowRenderer for PixelsWindowRenderer<Renderer> 
         self.window_handle = Some(window_handle);
 
         self.set_size(width, height);
+        Ok(())
     }
 
     fn suspend(&mut self) {

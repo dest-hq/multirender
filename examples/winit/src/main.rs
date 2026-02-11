@@ -25,7 +25,8 @@ struct App {
 type VelloCpuSBWindowRenderer = SoftbufferWindowRenderer<VelloCpuImageRenderer>;
 type VelloCpuWindowRenderer = PixelsWindowRenderer<VelloCpuImageRenderer>;
 
-type InitialBackend = VelloCpuSBWindowRenderer;
+type InitialBackend = SkiaWindowRenderer;
+type FallbackBackend = VelloCpuSBWindowRenderer;
 // type InitialBackend = VelloWindowRenderer;
 // type InitialBackend = VelloHybridWindowRenderer;
 // type InitialBackend = VelloCpuWindowRenderer;
@@ -164,9 +165,24 @@ impl App {
             Arc::new(event_loop.create_window(attr).unwrap())
         });
 
-        renderer.resume(window.clone(), self.width, self.height);
-        let renderer = renderer.into();
-        self.render_state = RenderState::Active { window, renderer };
+        if renderer
+            .resume(window.clone(), self.width, self.height)
+            .is_err()
+        {
+            let mut fallback_renderer = FallbackBackend::new();
+            fallback_renderer
+                .resume(window.clone(), self.width, self.height)
+                .unwrap();
+            let renderer = fallback_renderer.into();
+            self.render_state = RenderState::Active {
+                window,
+                renderer: renderer,
+            };
+            println!("Error, switched to fallback");
+        } else {
+            let renderer = renderer.into();
+            self.render_state = RenderState::Active { window, renderer };
+        };
         self.request_redraw();
     }
 }

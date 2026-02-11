@@ -127,7 +127,12 @@ impl WindowRenderer for VelloWindowRenderer {
         matches!(self.render_state, RenderState::Active(_))
     }
 
-    fn resume(&mut self, window_handle: Arc<dyn WindowHandle>, width: u32, height: u32) {
+    fn resume(
+        &mut self,
+        window_handle: Arc<dyn WindowHandle>,
+        width: u32,
+        height: u32,
+    ) -> Result<(), String> {
         // Create wgpu_context::SurfaceRenderer
         let render_surface = pollster::block_on(self.wgpu_context.create_surface(
             window_handle.clone(),
@@ -145,7 +150,7 @@ impl WindowRenderer for VelloWindowRenderer {
                 usage: TextureUsages::STORAGE_BINDING | TextureUsages::TEXTURE_BINDING,
             }),
         ))
-        .expect("Error creating surface");
+        .map_err(|_| "Error creating surface".to_string())?;
 
         // Create vello::Renderer
         let renderer = VelloRenderer::new(
@@ -158,7 +163,7 @@ impl WindowRenderer for VelloWindowRenderer {
                 pipeline_cache: None,
             },
         )
-        .unwrap();
+        .map_err(|_| "Error creating vello renderer".to_string())?;
 
         // Resume custom paint sources
         let device_handle = &render_surface.device_handle;
@@ -172,6 +177,8 @@ impl WindowRenderer for VelloWindowRenderer {
             renderer,
             render_surface,
         });
+
+        Ok(())
     }
 
     fn suspend(&mut self) {

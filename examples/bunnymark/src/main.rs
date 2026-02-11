@@ -3,7 +3,7 @@ use kurbo::{Affine, Circle, Point, Rect, Stroke};
 use multirender::{PaintScene, WindowRenderer};
 use multirender_skia::{SkiaImageRenderer, SkiaWindowRenderer};
 use multirender_vello::VelloWindowRenderer;
-use multirender_vello_cpu::VelloCpuWindowRenderer;
+use multirender_vello_cpu::{VelloCpuImageRenderer, VelloCpuWindowRenderer};
 use multirender_vello_hybrid::VelloHybridWindowRenderer;
 use peniko::{Color, Fill};
 use pixels_window_renderer::PixelsWindowRenderer;
@@ -21,6 +21,7 @@ mod bunny;
 const SKY_BLUE: Color = Color::from_rgb8(135, 206, 235);
 
 type SkiaRasterWindowRenderer = PixelsWindowRenderer<SkiaImageRenderer>;
+type FallbackBackend = PixelsWindowRenderer<VelloCpuImageRenderer>;
 
 struct App {
     render_state: RenderState,
@@ -148,10 +149,25 @@ impl App {
         self.scale_factor = window.scale_factor();
 
         let physical_size = window.inner_size();
-        renderer.resume(window.clone(), physical_size.width, physical_size.height);
-        self.render_state = RenderState::Active {
-            window,
-            renderer: f(renderer),
+        if renderer
+            .resume(window.clone(), physical_size.width, physical_size.height)
+            .is_err()
+        {
+            let mut fallback_renderer = FallbackBackend::new();
+            fallback_renderer
+                .resume(window.clone(), physical_size.width, physical_size.height)
+                .unwrap();
+            let f = |r| Renderer::Cpu(Box::new(r));
+            self.render_state = RenderState::Active {
+                window,
+                renderer: f(fallback_renderer),
+            };
+            println!("Error, switched to fallback");
+        } else {
+            self.render_state = RenderState::Active {
+                window,
+                renderer: f(renderer),
+            };
         };
         self.request_redraw();
     }

@@ -1,10 +1,7 @@
 use debug_timer::debug_timer;
 use multirender::{WindowHandle, WindowRenderer};
 use rustc_hash::FxHashMap;
-use std::sync::{
-    Arc,
-    // atomic::{AtomicU64},
-};
+use std::sync::Arc;
 use vello_common::paint::ImageId;
 use vello_hybrid::{
     RenderSettings, RenderSize, RenderTargetConfig, Renderer as VelloHybridRenderer,
@@ -122,7 +119,12 @@ impl WindowRenderer for VelloHybridWindowRenderer {
         matches!(self.render_state, RenderState::Active(_))
     }
 
-    fn resume(&mut self, window_handle: Arc<dyn WindowHandle>, width: u32, height: u32) {
+    fn resume(
+        &mut self,
+        window_handle: Arc<dyn WindowHandle>,
+        width: u32,
+        height: u32,
+    ) -> Result<(), String> {
         // Create wgpu_context::SurfaceRenderer
         let render_surface = pollster::block_on(self.wgpu_context.create_surface(
             window_handle.clone(),
@@ -141,7 +143,7 @@ impl WindowRenderer for VelloHybridWindowRenderer {
             //     usage: TextureUsages::STORAGE_BINDING | TextureUsages::TEXTURE_BINDING,
             // }),
         ))
-        .expect("Error creating surface");
+        .map_err(|_e| "Error creating surface".to_string())?;
 
         // Create vello::Renderer
         let renderer = VelloHybridRenderer::new(
@@ -169,6 +171,8 @@ impl WindowRenderer for VelloHybridWindowRenderer {
             renderer,
             render_surface,
         });
+
+        Ok(())
     }
 
     fn suspend(&mut self) {

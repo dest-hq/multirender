@@ -20,8 +20,14 @@ impl WindowRenderer for NullWindowRenderer {
     where
         Self: 'a;
 
-    fn resume(&mut self, _window: Arc<dyn WindowHandle>, _width: u32, _height: u32) {
+    fn resume(
+        &mut self,
+        _window: Arc<dyn WindowHandle>,
+        _width: u32,
+        _height: u32,
+    ) -> Result<(), String> {
         self.is_active = true;
+        Ok(())
     }
 
     fn suspend(&mut self) {
