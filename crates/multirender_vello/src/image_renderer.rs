@@ -1,8 +1,8 @@
 use multirender::ImageRenderer;
+use multirender_wgpu_context::{BufferRenderer, BufferRendererConfig, WGPUContext};
 use rustc_hash::FxHashMap;
 use vello::{Renderer as VelloRenderer, RendererOptions, Scene as VelloScene};
 use wgpu::TextureUsages;
-use wgpu_context::{BufferRenderer, BufferRendererConfig, WGPUContext};
 
 use crate::{DEFAULT_THREADS, VelloScenePainter};
 

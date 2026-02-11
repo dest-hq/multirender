@@ -1,7 +1,7 @@
+pub use multirender_wgpu_context::DeviceHandle;
 use peniko::ImageData;
 use vello::Renderer as VelloRenderer;
 use wgpu::Texture;
-pub use wgpu_context::DeviceHandle;
 
 pub trait CustomPaintSource: 'static {
     fn resume(&mut self, device_handle: &DeviceHandle);

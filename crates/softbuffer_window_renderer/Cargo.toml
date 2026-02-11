@@ -1,8 +1,8 @@
 [package]
-name = "softbuffer_window_renderer"
-description = "MultiRender WindowRenderer backed by the softbuffer crate"
-version = "0.2.1"
-documentation = "https://docs.rs/softbuffer_window_renderer"
+name = "multirender_softbuffer_window_renderer"
+description = "MultiRender WindowRenderer backend by the softbuffer crate"
+version.workspace = true
+documentation = "https://docs.rs/multirender_softbuffer_window"
 license.workspace = true
 edition.workspace = true
 

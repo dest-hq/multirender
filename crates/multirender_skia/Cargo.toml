@@ -1,15 +1,15 @@
 [package]
 name = "multirender_skia"
 description = "Skia backend for multirender"
-version = "0.4.0"
-documentation = "https://docs.rs/anyrender_skia"
+version.workspace = true
+documentation = "https://docs.rs/multirender_skia"
 license.workspace = true
 edition.workspace = true
 
 [features]
-pixels_window_renderer = ["dep:pixels_window_renderer"]
-softbuffer_window_renderer = ["dep:softbuffer_window_renderer"]
-log_frame_times = ["debug_timer/enable", "pixels_window_renderer?/log_frame_times", "softbuffer_window_renderer?/log_frame_times"]
+pixels_window_renderer = ["dep:multirender_pixels_window_renderer"]
+softbuffer_window_renderer = ["dep:multirender_softbuffer_window_renderer"]
+log_frame_times = ["debug_timer/enable", "multirender_pixels_window_renderer?/log_frame_times", "multirender_softbuffer_window_renderer?/log_frame_times"]
 vulkan = ["skia-safe/vulkan"]
 
 [dependencies]
@@ -18,8 +18,8 @@ debug_timer = { workspace = true }
 kurbo = { workspace = true }
 peniko = { workspace = true }
 raw-window-handle = { workspace = true }
-softbuffer_window_renderer = { workspace = true, optional = true }
-pixels_window_renderer = { workspace = true, optional = true }
+multirender_softbuffer_window_renderer = { workspace = true, optional = true }
+multirender_pixels_window_renderer = { workspace = true, optional = true }
 skia-safe = { version = "0.91.0", features = ["gl", "binary-cache"]}
 oaty = "0.1"
 hashbrown = "0.16.0"

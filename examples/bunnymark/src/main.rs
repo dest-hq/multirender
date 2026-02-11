@@ -1,12 +1,12 @@
 use bunny::BunnyManager;
 use kurbo::{Affine, Circle, Point, Rect, Stroke};
 use multirender::{PaintScene, WindowRenderer};
+use multirender_pixels_window_renderer::PixelsWindowRenderer;
 use multirender_skia::{SkiaImageRenderer, SkiaWindowRenderer};
 use multirender_vello::VelloWindowRenderer;
 use multirender_vello_cpu::{VelloCpuImageRenderer, VelloCpuWindowRenderer};
 use multirender_vello_hybrid::VelloHybridWindowRenderer;
 use peniko::{Color, Fill};
-use pixels_window_renderer::PixelsWindowRenderer;
 use std::sync::Arc;
 use winit::{
     application::ApplicationHandler,

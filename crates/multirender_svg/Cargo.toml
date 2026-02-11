@@ -1,8 +1,8 @@
 [package]
 name = "multirender_svg"
 description = "Render SVGs with multirender"
-version = "0.8.0"
-documentation = "https://docs.rs/anyrender-svg"
+version.workspace = true
+documentation = "https://docs.rs/multirender-svg"
 license.workspace = true
 edition.workspace = true
 

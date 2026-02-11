@@ -27,14 +27,14 @@ rust-version = "1.88.0"
 # MultiRender dependencies (in-repo)
 multirender = { version = "0.1.0", path = "./crates/multirender" }
 multirender_serialize = { version = "0.1.0", path = "./crates/multirender_serialize" }
-multirender_skia = { version = "0.4.0", path = "./crates/multirender_skia" }
-multirender_vello = { version = "0.7.0", path = "./crates/multirender_vello" }
-multirender_vello_cpu = { version = "0.9.0", path = "./crates/multirender_vello_cpu" }
-multirender_vello_hybrid = { version = "0.2.0", path = "./crates/multirender_vello_hybrid" }
-multirender_svg = { version = "0.8.0", path = "./crates/multirender_svg" }
-wgpu_context = { version = "0.3.0", path = "./crates/wgpu_context" }
-pixels_window_renderer = { version = "0.2.0", path = "./crates/pixels_window_renderer" }
-softbuffer_window_renderer = { version = "0.2.0", path = "./crates/softbuffer_window_renderer" }
+multirender_skia = { version = "0.1.0", path = "./crates/multirender_skia" }
+multirender_vello = { version = "0.1.0", path = "./crates/multirender_vello" }
+multirender_vello_cpu = { version = "0.1.0", path = "./crates/multirender_vello_cpu" }
+multirender_vello_hybrid = { version = "0.1.0", path = "./crates/multirender_vello_hybrid" }
+multirender_svg = { version = "0.1.0", path = "./crates/multirender_svg" }
+multirender_wgpu_context = { version = "0.1.0", path = "./crates/wgpu_context" }
+multirender_pixels_window_renderer = { version = "0.1.0", path = "./crates/pixels_window_renderer" }
+multirender_softbuffer_window_renderer = { version = "0.1.0", path = "./crates/softbuffer_window_renderer" }
 
 # Serialization
 serde = "1.0.228"

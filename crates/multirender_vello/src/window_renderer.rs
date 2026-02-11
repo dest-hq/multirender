@@ -1,5 +1,8 @@
 use debug_timer::debug_timer;
 use multirender::{WindowHandle, WindowRenderer};
+use multirender_wgpu_context::{
+    DeviceHandle, SurfaceRenderer, SurfaceRendererConfiguration, TextureConfiguration, WGPUContext,
+};
 use peniko::Color;
 use rustc_hash::FxHashMap;
 use std::sync::{
@@ -11,9 +14,6 @@ use vello::{
     Scene as VelloScene,
 };
 use wgpu::{Features, Limits, PresentMode, TextureFormat, TextureUsages};
-use wgpu_context::{
-    DeviceHandle, SurfaceRenderer, SurfaceRendererConfiguration, TextureConfiguration, WGPUContext,
-};
 
 use crate::{CustomPaintSource, DEFAULT_THREADS, VelloScenePainter};
 

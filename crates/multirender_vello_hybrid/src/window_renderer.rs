@@ -1,5 +1,8 @@
 use debug_timer::debug_timer;
 use multirender::{WindowHandle, WindowRenderer};
+use multirender_wgpu_context::{
+    DeviceHandle, SurfaceRenderer, SurfaceRendererConfiguration, WGPUContext,
+};
 use rustc_hash::FxHashMap;
 use std::sync::Arc;
 use vello_common::paint::ImageId;
@@ -8,7 +11,6 @@ use vello_hybrid::{
     Scene as VelloHybridScene,
 };
 use wgpu::{CommandEncoderDescriptor, Features, Limits, PresentMode, TextureFormat};
-use wgpu_context::{DeviceHandle, SurfaceRenderer, SurfaceRendererConfiguration, WGPUContext};
 
 use crate::{VelloHybridScenePainter, scene::ImageManager};
 // use crate::CustomPaintSource;

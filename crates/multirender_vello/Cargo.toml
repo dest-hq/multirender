@@ -1,8 +1,8 @@
 [package]
 name = "multirender_vello"
 description = "Vello backend for multirender"
-version = "0.7.1"
-documentation = "https://docs.rs/anyrender_vello"
+version.workspace = true
+documentation = "https://docs.rs/multirender_vello"
 license.workspace = true
 edition.workspace = true
 
@@ -11,7 +11,7 @@ log_frame_times = ["debug_timer/enable"]
 
 [dependencies]
 multirender = { workspace = true }
-wgpu_context = { workspace = true }
+multirender_wgpu_context = { workspace = true }
 
 debug_timer = { workspace = true }
 kurbo = { workspace = true }
