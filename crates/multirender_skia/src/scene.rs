@@ -531,7 +531,6 @@ mod sk_peniko {
         ImageFormat, Mix,
     };
     use peniko::{Fill, color::DynamicColor};
-    use skia_safe::AlphaType as SkAlphaType;
     use skia_safe::BlendMode as SkBlendMode;
     use skia_safe::Color4f as SkColor4f;
     use skia_safe::ColorType as SkColorType;
@@ -541,8 +540,10 @@ mod sk_peniko {
     use skia_safe::SamplingOptions as SkSamplingOptions;
     use skia_safe::Shader as SkShader;
     use skia_safe::TileMode as SkTileMode;
+    use skia_safe::gradient::Colors;
     use skia_safe::gradient_shader::interpolation::ColorSpace as SkGradientShaderColorSpace;
     use skia_safe::gradient_shader::interpolation::HueMethod as SkGradientShaderHueMethod;
+    use skia_safe::{AlphaType as SkAlphaType, shaders};
 
     pub(super) fn shader_from_image_brush(
         image_brush: ImageBrush<&ImageData>,
@@ -626,12 +627,19 @@ mod sk_peniko {
                     ),
                 };
 
-                SkShader::linear_gradient_with_interpolation(
-                    (start, end),
-                    (&colors[..], None),
-                    &positions[..],
+                let gradient_colors = Colors::new(
+                    colors.as_slice(),
+                    Some(&positions[..]),
                     tile_mode_from_extend(gradient.extend),
-                    interpolation,
+                    None,
+                );
+
+                let gradient =
+                    skia_safe::gradient_shader::Gradient::new(gradient_colors, interpolation);
+
+                shaders::linear_gradient(
+                    (start, end),
+                    &gradient,
                     &brush_transform.map(super::sk_kurbo::matrix_from_affine),
                 )
                 .unwrap()
@@ -659,23 +667,37 @@ mod sk_peniko {
                 };
 
                 if start_center == end_center && start_radius == end_radius {
-                    SkShader::radial_gradient_with_interpolation(
-                        (start_center, start_radius),
-                        (&colors[..], None),
-                        &positions[..],
+                    let gradient_colors = Colors::new(
+                        colors.as_slice(),
+                        Some(&positions[..]),
                         tile_mode_from_extend(gradient.extend),
-                        interpolation,
+                        None,
+                    );
+
+                    let gradient =
+                        skia_safe::gradient_shader::Gradient::new(gradient_colors, interpolation);
+
+                    shaders::radial_gradient(
+                        (start_center, start_radius),
+                        &gradient,
                         &brush_transform.map(super::sk_kurbo::matrix_from_affine),
                     )
                     .unwrap()
                 } else {
-                    SkShader::two_point_conical_gradient_with_interpolation(
+                    let gradient_colors = Colors::new(
+                        colors.as_slice(),
+                        Some(&positions[..]),
+                        tile_mode_from_extend(gradient.extend),
+                        None,
+                    );
+
+                    let gradient =
+                        skia_safe::gradient_shader::Gradient::new(gradient_colors, interpolation);
+
+                    shaders::two_point_conical_gradient(
                         (start_center, start_radius),
                         (end_center, end_radius),
-                        (&colors[..], None),
-                        &positions[..],
-                        tile_mode_from_extend(gradient.extend),
-                        interpolation,
+                        &gradient,
                         &brush_transform.map(super::sk_kurbo::matrix_from_affine),
                     )
                     .unwrap()
@@ -690,6 +712,8 @@ mod sk_peniko {
                     positions.push(color_stop.offset);
                 }
                 let center = super::sk_kurbo::pt_from(sweep_gradient_position.center);
+                let start_angle = rad_to_deg(sweep_gradient_position.start_angle);
+                let end_angle = rad_to_deg(sweep_gradient_position.end_angle);
 
                 let interpolation = skia_safe::gradient_shader::Interpolation {
                     color_space: gradient_shader_cs_from_cs_tag(gradient.interpolation_cs),
@@ -699,16 +723,20 @@ mod sk_peniko {
                     ),
                 };
 
-                SkShader::sweep_gradient_with_interpolation(
-                    center,
-                    (&colors[..], None),
-                    &positions[..],
+                let gradient_colors = Colors::new(
+                    colors.as_slice(),
+                    Some(&positions[..]),
                     tile_mode_from_extend(gradient.extend),
-                    (
-                        rad_to_deg(sweep_gradient_position.start_angle),
-                        rad_to_deg(sweep_gradient_position.end_angle),
-                    ),
-                    interpolation,
+                    None,
+                );
+
+                let gradient =
+                    skia_safe::gradient_shader::Gradient::new(gradient_colors, interpolation);
+
+                shaders::sweep_gradient(
+                    center,
+                    (start_angle, end_angle),
+                    &gradient,
                     &brush_transform.map(super::sk_kurbo::matrix_from_affine),
                 )
                 .unwrap()

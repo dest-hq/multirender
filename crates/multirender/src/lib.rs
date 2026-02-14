@@ -1,32 +1,3 @@
-//! 2D drawing abstraction that allows applications/frameworks to support many rendering backends through
-//! a unified API.
-//!
-//! ### Painting a scene
-//!
-//! The core abstraction in MultiRender is the [`PaintScene`] trait.
-//!
-//! [`PaintScene`] is a "sink" which accepts drawing commands:
-//!
-//!   - Applications and libraries draw by pushing commands into a [`PaintScene`]
-//!   - Backends execute those commands to produce an output
-//!
-//! ### Rendering to surface or buffer
-//!
-//! In addition to PaintScene, there is:
-//!
-//!   - The [`ImageRenderer`] trait which provides an abstraction for rendering to a `Vec<u8>` RGBA8 buffer.
-//!   - The [`WindowRenderer`] trait which provides an abstraction for rendering to a surface/window
-//!
-//! ### SVG
-//!
-//! The [multirender_svg](https://docs.rs/multirender_svg) crate allows SVGs to be rendered using MultiRender
-//!
-//! ### Backends
-//!
-//! Currently existing backends are:
-//!  - [multirender_vello](https://docs.rs/multirender_vello)
-//!  - [multirender_vello_cpu](https://docs.rs/multirender_vello_cpu)
-
 use kurbo::{Affine, Rect, Shape, Stroke};
 use peniko::{BlendMode, Brush, Color, Fill, FontData, ImageBrushRef, StyleRef};
 use recording::RenderCommand;
